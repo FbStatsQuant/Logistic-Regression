@@ -284,54 +284,7 @@ A classifier is **calibrated** if its predicted probabilities match observed fre
 
 ---
 
-## 9. Implementation in Python
-
-```python
-import numpy as np
-import pandas as pd
-from sklearn.datasets import load_breast_cancer
-from sklearn.preprocessing import StandardScaler
-import statsmodels.api as sm
-
-# Load data
-data = load_breast_cancer()
-X = pd.DataFrame(data.data, columns=data.feature_names)
-y = pd.Series(data.target, name='target')  # 1 = malignant, 0 = benign
-
-# Scale predictors (important for convergence and coefficient comparability)
-scaler = StandardScaler()
-X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
-
-# Check VIF and drop high-collinearity predictors
-from statsmodels.stats.outliers_influence import variance_inflation_factor
-X_const = sm.add_constant(X_scaled)
-vif = pd.Series(
-    [variance_inflation_factor(X_const.values, i) for i in range(X_const.shape[1])],
-    index=X_const.columns
-)
-high_vif = vif[vif > 10].index.tolist()
-X_filtered = X_const.drop(columns=high_vif)
-
-# Fit logistic regression
-model = sm.Logit(y, X_filtered).fit()
-print(model.summary())
-
-# Odds ratios and confidence intervals
-odds_ratios = np.exp(model.params)
-conf_int = np.exp(model.conf_int())
-print(pd.concat([odds_ratios, conf_int], axis=1).rename(columns={0: 'OR', 1: 'CI_low', 2: 'CI_high'}))
-
-# ROC AUC
-from sklearn.metrics import roc_auc_score
-auc = roc_auc_score(y, model.predict())
-print(f"AUC: {auc:.3f}")
-```
-
-The `statsmodels` summary reports: coefficient estimates, standard errors, z-statistics, p-values, confidence intervals, log-likelihood, and McFadden's $R^2$. Coefficient estimates must be exponentiated to obtain odds ratios; they should not be interpreted directly on the log-odds scale in most applied contexts.
-
----
-
-## 10. Strengths and Weaknesses
+## 9. Strengths and Weaknesses
 
 ### Strengths
 
@@ -355,7 +308,7 @@ The `statsmodels` summary reports: coefficient estimates, standard errors, z-sta
 
 ---
 
-## 11. Summary
+## 10. Summary
 
 1. **The logistic model** estimates $P(y = 1 \mid X) = \sigma(X\beta)$. It is linear on the log-odds scale, nonlinear on the probability scale. Coefficients measure effects on the log-odds, not on probabilities directly.
 
