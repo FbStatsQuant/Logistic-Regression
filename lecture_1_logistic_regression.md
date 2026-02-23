@@ -190,7 +190,7 @@ where $q$ is the number of restrictions. The LR test is generally preferred over
 
 ### Pseudo-$R^2$
 
-There is no direct analogue of $R^2$ in logistic regression. Several pseudo-$R^2$ measures have been proposed; the most common are:
+There is no direct analogue of $R^2$ in logistic regression. Several pseudo- $R^2$ measures have been proposed; the most common are:
 
 **McFadden's $R^2$**:
 
@@ -230,10 +230,10 @@ VIF is still applicable, computed from auxiliary OLS regressions of each predict
 
 | VIF | Interpretation |
 |---|---|
-| $1$ | No collinearity |
-| $1$–$5$ | Mild, generally acceptable |
-| $5$–$10$ | Moderate concern |
-| $> 10$ | Severe — coefficient estimates unreliable |
+| 1 | No collinearity |
+| 1–5 | Mild, generally acceptable |
+| 5–10 | Moderate concern |
+| > 10 | Severe — coefficient estimates unreliable |
 
 ### Remedies
 
