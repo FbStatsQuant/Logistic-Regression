@@ -563,28 +563,6 @@ if phi_hat > 1.5:
     print("WARNING: Possible overdispersion — consider quasi-likelihood.")
 ```
 
----
-
-## 11. Summary of Diagnostics
-
-| Diagnostic | Tool | Flags |
-|---|---|---|
-| Overall model utility | Likelihood ratio test $G^2$ | $p > 0.05$ — model explains nothing |
-| Goodness of fit | Hosmer-Lemeshow, calibration plot | Poor observed-vs-expected agreement |
-| Outliers | Deviance residuals, studentized residuals | $|r_i| > 2$ |
-| Leverage | Hat values $h_{ii}$ | $h_{ii} > 2(p+1)/n$ |
-| Influence | Cook's $D$, DFBETAs | $D_i > 4/n$, $|\mathrm{DFBETA}| > 2/\sqrt{n}$ |
-| Multicollinearity | VIF, condition number | VIF $> 10$, $\kappa > 30$ |
-| Linearity in log-odds | Box-Tidwell, LOWESS | Significant $\gamma_j$, curved smoother |
-| Separation | Coefficient magnitude, SE magnitude | $|\hat{\beta}| \gg 10$, $\widehat{\mathrm{SE}} \gg 100$ |
-| Discrimination | AUC-ROC, AUC-PR | AUC $< 0.7$ for most applications |
-| Calibration | Calibration plot, slope | Slope $\neq 1$, systematic deviation from diagonal |
-| Overdispersion | $\hat{\phi}$ | $\hat{\phi} > 1.5$ in grouped data |
-
-The diagnostic process is iterative, not a checklist. Each finding may reveal a deeper issue that requires re-examination of earlier steps. A model that passes all diagnostics is not necessarily correct — it is a model for which the available diagnostics have not detected failure.
-
----
-
 ## References
 
 - Hosmer, D. W., Lemeshow, S., & Sturdivant, R. X. (2013). *Applied Logistic Regression* (3rd ed.). Wiley.
